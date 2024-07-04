@@ -94,7 +94,7 @@ class ParallaxRecipe extends StatelessWidget {
 
 @immutable
 class LocationListItem extends StatelessWidget {
-  const LocationListItem({
+  LocationListItem({
     super.key,
     required this.imageUrl,
     required this.name,
@@ -104,6 +104,8 @@ class LocationListItem extends StatelessWidget {
   final String imageUrl;
   final String name;
   final String country;
+
+  final GlobalKey _backgroundImageKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +129,14 @@ class LocationListItem extends StatelessWidget {
 
   Widget _buildParallaxBackground(BuildContext context) {
     return Flow(
-      delegate: ParallaxFlowDelegate(),
+      delegate: ParallaxFlowDelegate(
+        scrollableState: Scrollable.of(context),
+        listItemContext: context,
+        backgroundImageKey: _backgroundImageKey,
+      ),
       children: [
         Image.network(
+          key: _backgroundImageKey,
           imageUrl,
           fit: BoxFit.cover,
         ),
@@ -182,7 +189,15 @@ class LocationListItem extends StatelessWidget {
 }
 
 class ParallaxFlowDelegate extends FlowDelegate {
-  ParallaxFlowDelegate();
+  ParallaxFlowDelegate({
+    required this.scrollableState,
+    required this.listItemContext,
+    required this.backgroundImageKey,
+  });
+
+  final ScrollableState scrollableState;
+  final BuildContext listItemContext;
+  final GlobalKey backgroundImageKey;
 
   @override
   BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) {
