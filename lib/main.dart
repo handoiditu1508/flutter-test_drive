@@ -23,14 +23,14 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  static const String title = 'Flutter Demo Home Page';
+  static const title = 'Flutter Demo Home Page';
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             // Provide a standard title.
             title: Text(title),
             // Allows the user to reveal the app bar if they begin scrolling
@@ -40,6 +40,16 @@ class MyHomePage extends StatelessWidget {
             flexibleSpace: Placeholder(),
             // Make the initial height of the SliverAppBar larger than normal.
             expandedHeight: 200,
+          ),
+          SliverList(
+            // Use a delegate to build items as they're scrolled on screen.
+            delegate: SliverChildBuilderDelegate(
+              // The builder function returns a ListTile with a title that
+              // displays the index of the current item.
+              (context, index) => ListTile(title: Text('Item #$index')),
+              // Builds 1000 ListTiles
+              childCount: 1000,
+            ),
           ),
         ],
       ),
