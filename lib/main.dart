@@ -126,11 +126,14 @@ class LocationListItem extends StatelessWidget {
   }
 
   Widget _buildParallaxBackground(BuildContext context) {
-    return Positioned.fill(
-      child: Image.network(
-        imageUrl,
-        fit: BoxFit.cover,
-      ),
+    return Flow(
+      delegate: ParallaxFlowDelegate(),
+      children: [
+        Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+        ),
+      ],
     );
   }
 
@@ -175,5 +178,26 @@ class LocationListItem extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ParallaxFlowDelegate extends FlowDelegate {
+  ParallaxFlowDelegate();
+
+  @override
+  BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) {
+    // TODO: We'll add more to this later.
+    throw UnimplementedError();
+  }
+
+  @override
+  void paintChildren(FlowPaintingContext context) {
+    // TODO: We'll add more to this later.
+  }
+
+  @override
+  bool shouldRepaint(covariant FlowDelegate oldDelegate) {
+    // TODO: We'll add more to this later.
+    return true;
   }
 }
