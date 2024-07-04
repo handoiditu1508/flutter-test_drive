@@ -186,8 +186,10 @@ class ParallaxFlowDelegate extends FlowDelegate {
 
   @override
   BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) {
-    // TODO: We'll add more to this later.
-    throw UnimplementedError();
+    // image must be exactly as wide as the Flow widget
+    return BoxConstraints.tightFor(
+      width: constraints.maxWidth,
+    );
   }
 
   @override
