@@ -7,6 +7,14 @@ class Todo {
   const Todo(this.title, this.description);
 }
 
+final todos = List.generate(
+  20,
+  (i) => Todo(
+    "Todo $i",
+    "A description of what needs to be done for Todo $i",
+  ),
+);
+
 void main() {
   runApp(const MyApp());
 }
