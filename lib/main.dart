@@ -64,6 +64,16 @@ class _SelectionButtonState extends State<SelectionButton> {
       // Create the SelectionScreen in the next step.
       MaterialPageRoute(builder: (context) => const SelectionScreen()),
     );
+
+    // When a BuildContext is used from a StatefulWidget, the mounted property
+    // must be checked after an asynchronous gap.
+    if (!context.mounted) return;
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('$result')));
   }
 }
 
