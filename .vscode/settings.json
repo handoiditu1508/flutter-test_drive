@@ -14,5 +14,8 @@
   },
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
+  },
+  "[xml]": {
+    "editor.tabSize": 4,
   }
 }
