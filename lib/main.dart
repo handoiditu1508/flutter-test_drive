@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const FirstRoute());
+  runApp(const MaterialApp(
+    home: FirstRoute(),
+  ));
 }
 
 class FirstRoute extends StatelessWidget {
