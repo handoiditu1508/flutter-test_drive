@@ -8,10 +8,16 @@ class Document {
   // The first field is positional and unnamed,
   // and the second field is named modified
   (String, {DateTime modified}) get metadata {
-    const title = 'My Document';
-    final now = DateTime.now();
-
-    return (title, modified: now);
+    if (_json.containsKey('metadata')) {
+      final metadataJson = _json['metadata'];
+      if (metadataJson is Map) {
+        final title = metadataJson['title'] as String;
+        final localModified =
+            DateTime.parse(metadataJson['modified'] as String);
+        return (title, modified: localModified);
+      }
+    }
+    throw const FormatException('Unexpected JSON');
   }
 }
 
