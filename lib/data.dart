@@ -3,6 +3,16 @@ import 'dart:convert';
 class Document {
   final Map<String, Object?> _json;
   Document() : _json = jsonDecode(documentJson);
+
+  // Return record with two fields.
+  // The first field is positional and unnamed,
+  // and the second field is named modified
+  (String, {DateTime modified}) get metadata {
+    const title = 'My Document';
+    final now = DateTime.now();
+
+    return (title, modified: now);
+  }
 }
 
 const documentJson = '''
