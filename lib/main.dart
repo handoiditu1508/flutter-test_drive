@@ -26,6 +26,20 @@ class DocumentScreen extends StatelessWidget {
     required this.document,
   });
 
+  String formatDate(DateTime dateTime) {
+    final today = DateTime.now();
+    final difference = dateTime.difference(today);
+
+    return switch (difference) {
+      Duration(inDays: 0) => 'today',
+      Duration(inDays: 1) => 'tomorrow',
+      Duration(inDays: -1) => 'yesterday',
+      Duration(inDays: final days, isNegative: true) =>
+        '${days.abs()} days ago',
+      Duration(inDays: final days) => '$days days from now',
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final (title, :modified) = document.metadata;
