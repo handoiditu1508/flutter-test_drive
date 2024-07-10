@@ -60,6 +60,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
                 duration: _duration,
+                curve: Curves.easeInOutBack,
               ),
             ),
             ElevatedButton(
