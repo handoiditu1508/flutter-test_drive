@@ -34,7 +34,7 @@ extension ThemeModeExtension on ThemeMode {
 }
 
 class SettingsBottomSheet extends StatefulWidget {
-  const SettingsBottomSheet({Key? key}) : super(key: key);
+  const SettingsBottomSheet({super.key});
 
   @override
   SettingsBottomSheetState createState() => SettingsBottomSheetState();

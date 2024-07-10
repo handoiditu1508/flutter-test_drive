@@ -8,7 +8,7 @@ import 'model/email_store.dart';
 import 'model/router_provider.dart';
 
 class ReplyApp extends StatefulWidget {
-  const ReplyApp({Key? key}) : super(key: key);
+  const ReplyApp({super.key});
 
   @override
   ReplyAppState createState() => ReplyAppState();
@@ -74,10 +74,8 @@ ThemeData _buildReplyLightTheme(BuildContext context) {
       error: ReplyColors.red400,
       onPrimary: ReplyColors.white50,
       onSecondary: ReplyColors.black900,
-      onBackground: ReplyColors.black900,
       onSurface: ReplyColors.black900,
       onError: ReplyColors.black900,
-      background: ReplyColors.blue50,
     ),
     textTheme: _buildReplyLightTextTheme(base.textTheme),
     scaffoldBackgroundColor: ReplyColors.blue50,
@@ -107,10 +105,8 @@ ThemeData _buildReplyDarkTheme(BuildContext context) {
       error: ReplyColors.red200,
       onPrimary: ReplyColors.black900,
       onSecondary: ReplyColors.black900,
-      onBackground: ReplyColors.white50,
       onSurface: ReplyColors.white50,
       onError: ReplyColors.black900,
-      background: ReplyColors.black900,
     ),
     textTheme: _buildReplyDarkTextTheme(base.textTheme),
     scaffoldBackgroundColor: ReplyColors.black900,

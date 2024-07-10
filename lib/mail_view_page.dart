@@ -6,8 +6,7 @@ import 'model/email_store.dart';
 import 'profile_avatar.dart';
 
 class MailViewPage extends StatelessWidget {
-  const MailViewPage({Key? key, required this.id, required this.email})
-      : super(key: key);
+  const MailViewPage({super.key, required this.id, required this.email});
 
   final int id;
   final Email email;

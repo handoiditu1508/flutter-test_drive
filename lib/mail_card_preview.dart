@@ -10,12 +10,12 @@ import 'profile_avatar.dart';
 
 class MailPreviewCard extends StatelessWidget {
   const MailPreviewCard({
-    Key? key,
+    super.key,
     required this.id,
     required this.email,
     required this.onDelete,
     required this.onStar,
-  }) : super(key: key);
+  });
 
   final int id;
   final Email email;
@@ -107,7 +107,7 @@ class MailPreviewCard extends StatelessWidget {
                 : theme.scaffoldBackgroundColor,
             iconColor: currentEmailStarred
                 ? colorScheme.onSecondary
-                : colorScheme.onBackground,
+                : colorScheme.onSurface,
             alignment: Alignment.centerRight,
             padding: const EdgeInsetsDirectional.only(end: 20),
           ),
@@ -140,7 +140,7 @@ class _DismissibleContainer extends StatelessWidget {
     return AnimatedContainer(
       alignment: alignment,
       color: backgroundColor,
-      curve: standardEasing,
+      curve: Easing.standard,
       duration: kThemeAnimationDuration,
       padding: padding,
       child: Material(
@@ -228,10 +228,10 @@ class _MailPreview extends StatelessWidget {
                   ),
                 ),
                 if (email.containsPictures) ...[
-                  Flexible(
+                  const Flexible(
                     fit: FlexFit.loose,
                     child: Column(
-                      children: const [
+                      children: [
                         SizedBox(height: 20),
                         _PicturePreview(),
                       ],

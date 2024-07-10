@@ -22,7 +22,7 @@ const double _kFlingVelocity = 2.0;
 const _kAnimationDuration = Duration(milliseconds: 300);
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   HomePageState createState() => HomePageState();
@@ -118,20 +118,20 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     _drawerCurve = CurvedAnimation(
       parent: _drawerController,
-      curve: standardEasing,
-      reverseCurve: standardEasing.flipped,
+      curve: Easing.standard,
+      reverseCurve: Easing.standard.flipped,
     );
 
     _dropArrowCurve = CurvedAnimation(
       parent: _dropArrowController,
-      curve: standardEasing,
-      reverseCurve: standardEasing.flipped,
+      curve: Easing.standard,
+      reverseCurve: Easing.standard.flipped,
     );
 
     _bottomAppBarCurve = CurvedAnimation(
       parent: _bottomAppBarController,
-      curve: standardEasing,
-      reverseCurve: standardEasing.flipped,
+      curve: Easing.standard,
+      reverseCurve: Easing.standard.flipped,
     );
   }
 
@@ -172,8 +172,8 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         context,
         listen: false,
       ).bottomDrawerVisible = true;
-      _drawerController.animateTo(0.4, curve: standardEasing);
-      _dropArrowController.animateTo(0.35, curve: standardEasing);
+      _drawerController.animateTo(0.4, curve: Easing.standard);
+      _dropArrowController.animateTo(0.35, curve: Easing.standard);
       return;
     }
 
@@ -346,7 +346,7 @@ class _AnimatedBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var fadeOut = Tween<double>(begin: 1, end: -1).animate(
-      drawerController.drive(CurveTween(curve: standardEasing)),
+      drawerController.drive(CurveTween(curve: Easing.standard)),
     );
 
     return Selector<EmailStore, bool>(
@@ -683,7 +683,8 @@ class _MailRouter extends StatelessWidget {
 }
 
 class _ReplyLogo extends StatelessWidget {
-  const _ReplyLogo({Key? key}) : super(key: key);
+  // ignore: unused_element
+  const _ReplyLogo({super.key});
 
   @override
   Widget build(BuildContext context) {

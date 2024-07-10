@@ -102,7 +102,7 @@ class ReplyRouteInformationParser
   @override
   Future<ReplyRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
-    final url = Uri.parse(routeInformation.location!);
+    final url = routeInformation.uri;
 
     if (url.path == _searchPageLocation) {
       return SynchronousFuture<ReplySearchPath>(const ReplySearchPath());
@@ -114,10 +114,10 @@ class ReplyRouteInformationParser
   @override
   RouteInformation? restoreRouteInformation(ReplyRoutePath configuration) {
     if (configuration is ReplyHomePath) {
-      return const RouteInformation(location: _homePageLocation);
+      return RouteInformation(uri: Uri.parse(_homePageLocation));
     }
     if (configuration is ReplySearchPath) {
-      return const RouteInformation(location: _searchPageLocation);
+      return RouteInformation(uri: Uri.parse(_searchPageLocation));
     }
     return null;
   }

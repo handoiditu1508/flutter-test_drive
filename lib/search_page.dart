@@ -4,7 +4,7 @@ import 'package:reply/model/router_provider.dart';
 import 'package:reply/router.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +43,11 @@ class SearchPage extends StatelessWidget {
                 ),
               ),
               const Divider(thickness: 1),
-              Expanded(
+              const Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       _SectionHeader(title: 'YESTERDAY'),
                       _SearchHistoryTile(
                         search: '481 Van Brunt Street',
