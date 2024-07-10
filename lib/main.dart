@@ -1,41 +1,81 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+double randomBorderRadius() {
+  return Random().nextDouble() * 64;
+}
+
+double randomMargin() {
+  return Random().nextDouble() * 64;
+}
+
+Color randomColor() {
+  return Color(0xFFFFFFFF & Random().nextInt(0xFFFFFFFF));
+}
+
+class AnimatedContainerDemo extends StatefulWidget {
+  const AnimatedContainerDemo({super.key});
+
+  @override
+  State<AnimatedContainerDemo> createState() => _AnimatedContainerDemoState();
+}
+
+class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
+  late Color color;
+  late double borderRadius;
+  late double margin;
+
+  @override
+  void initState() {
+    super.initState();
+    color = randomColor();
+    borderRadius = randomBorderRadius();
+    margin = randomMargin();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              width: 128,
+              height: 128,
+              child: Container(
+                margin: EdgeInsets.all(margin),
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(borderRadius),
+                ),
+              ),
+            ),
+            ElevatedButton(
+              child: const Text('Change'),
+              onPressed: () => {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AnimatedContainerDemo(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
-      ),
-      body: const Center(
-        child: Text('You have pushed the button this many times:'),
-      ),
-    );
-  }
+void main() {
+  runApp(
+    const MyApp(),
+  );
 }
