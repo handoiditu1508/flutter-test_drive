@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+const _duration = Duration(milliseconds: 400);
+
 double randomBorderRadius() {
   return Random().nextDouble() * 64;
 }
@@ -34,6 +36,14 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     margin = randomMargin();
   }
 
+  void change() {
+    setState(() {
+      color = randomColor();
+      borderRadius = randomBorderRadius();
+      margin = randomMargin();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,17 +53,18 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             SizedBox(
               width: 128,
               height: 128,
-              child: Container(
+              child: AnimatedContainer(
                 margin: EdgeInsets.all(margin),
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
+                duration: _duration,
               ),
             ),
             ElevatedButton(
+              onPressed: change,
               child: const Text('Change'),
-              onPressed: () => {},
             ),
           ],
         ),
