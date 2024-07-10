@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const MyNavigation(),
     );
   }
 }
@@ -40,29 +40,83 @@ class MyInheritedWidget extends InheritedWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+// route function for  Routing of pages
+Route generatePage(child) {
+  return MaterialPageRoute(builder: (context) => child);
+}
+
+class MyNavigation extends StatelessWidget {
+  const MyNavigation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MyInheritedWidget(
+      // message as string for our inherited widget
+      message: 'Hey, Geekss',
+      child: Navigator(
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case 'screen1':
+              // Route for firs screen
+              return generatePage(const FirstScreen());
+            case 'screen2':
+              // Route for second screen
+              return generatePage(const SecondScreen());
+          }
+          return null;
+        },
+        // our first screen in app
+        initialRoute: 'screen1',
+      ),
+    );
+  }
+}
+
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
+  // same as: const FirstScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Flutter Demo Home Page'),
+        title: const Text('Geeks For Geeks'),
+        backgroundColor: Colors.green,
       ),
-      body: MyInheritedWidget(
-        message: 'Hello World!',
-        child: Builder(builder: (BuildContext innerContext) {
-          return Center(
-            child: Text(
-              MyInheritedWidget.of(innerContext).message,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          );
-        }),
+      body: Center(
+        child: ElevatedButton(
+          // showing message variable of our
+          // inherotedd widget class using of()
+          child: Text(MyInheritedWidget.of(context).message),
+          onPressed: () {
+            Navigator.of(context)
+                // navigate to second screen
+                .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
+          },
+        ),
       ),
     );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+  // same as: const SecondScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Geeks For Geeks'),
+          backgroundColor: Colors.green,
+        ),
+        body: Center(
+          child: Text(
+            "${MyInheritedWidget.of(context).message}\n This is second screen",
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          // showing message variable of our
+          // inherotedd widget class using of()
+        ));
   }
 }
