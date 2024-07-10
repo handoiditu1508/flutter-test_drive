@@ -21,6 +21,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyInheritedWidget extends InheritedWidget {
+  const MyInheritedWidget(
+      {super.key, required super.child, required this.message});
+
+  // final Widget child;
+
+  // message of our inherited widget class
+  final String message;
+
+  static MyInheritedWidget of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<MyInheritedWidget>()!;
+  }
+
+  @override
+  bool updateShouldNotify(MyInheritedWidget oldWidget) {
+    return oldWidget.message != message;
+  }
+}
+
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
 
