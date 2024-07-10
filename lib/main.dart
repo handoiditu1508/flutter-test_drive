@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
@@ -41,19 +41,27 @@ class MyInheritedWidget extends InheritedWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        title: const Text('Flutter Demo Home Page'),
       ),
-      body: const Center(
-        child: Text('You have pushed the button this many times:'),
+      body: MyInheritedWidget(
+        message: 'Hello World!',
+        child: Builder(builder: (BuildContext innerContext) {
+          return Center(
+            child: Text(
+              MyInheritedWidget.of(innerContext).message,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
