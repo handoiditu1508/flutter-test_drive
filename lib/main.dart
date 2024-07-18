@@ -1,3 +1,5 @@
+import 'package:ecommerce/configs/config.dart';
+import 'package:ecommerce/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,12 +12,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Ecommerce',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Config.seedColor,
+        ),
         useMaterial3: true,
       ),
-      home: const Text('init content'),
+      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
