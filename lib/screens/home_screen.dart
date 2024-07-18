@@ -1,5 +1,5 @@
-import 'package:ecommerce/screens/second_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -30,8 +30,17 @@ class HomeScreen extends StatelessWidget {
         child: TextButton(
           child: const Text('Next page'),
           onPressed: () {
-            navigator.push(
-                MaterialPageRoute(builder: (context) => const SecondScreen()));
+            // navigator.push(
+            //     MaterialPageRoute(builder: (context) => const SecondScreen()));
+
+            // context.go('/2nd');
+
+            // context.goNamed('products');
+            context.pushNamed('products');
+
+            // context.go(Uri(
+            //   path: '/products/1',
+            // ).toString());
           },
         ),
       ),
