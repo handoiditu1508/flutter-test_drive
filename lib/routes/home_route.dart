@@ -1,3 +1,4 @@
+import 'package:ecommerce/routes/second_route.dart';
 import 'package:flutter/material.dart';
 
 class HomeRoute extends StatelessWidget {
@@ -5,6 +6,8 @@ class HomeRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -23,13 +26,14 @@ class HomeRoute extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          for (var i = 0; i < 10; i++)
-            const Placeholder(
-              fallbackHeight: 200,
-            )
-        ],
+      body: Center(
+        child: TextButton(
+          child: const Text('Next page'),
+          onPressed: () {
+            navigator.push(
+                MaterialPageRoute(builder: (context) => const SecondRoute()));
+          },
+        ),
       ),
     );
   }
