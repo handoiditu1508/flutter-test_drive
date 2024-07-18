@@ -1,5 +1,5 @@
 import 'package:ecommerce/configs/config.dart';
-import 'package:ecommerce/pages/home_page.dart';
+import 'package:ecommerce/routes/home_route.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const HomeRoute(),
       debugShowCheckedModeBanner: false,
     );
   }
