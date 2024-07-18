@@ -1,8 +1,8 @@
-import 'package:ecommerce/routes/second_route.dart';
+import 'package:ecommerce/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomeRoute extends StatelessWidget {
-  const HomeRoute({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class HomeRoute extends StatelessWidget {
           child: const Text('Next page'),
           onPressed: () {
             navigator.push(
-                MaterialPageRoute(builder: (context) => const SecondRoute()));
+                MaterialPageRoute(builder: (context) => const SecondScreen()));
           },
         ),
       ),
