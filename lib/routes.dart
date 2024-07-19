@@ -56,9 +56,20 @@ final routes2 = GoRouter(
       path: '/products/:productId',
       name: 'product details',
       redirect: authGuard,
-      builder: (context, state) {
+      pageBuilder: (context, state) {
         final productId = int.parse(state.pathParameters['productId']!);
-        return ProductDetailsScreen(productId: productId);
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: ProductDetailsScreen(productId: productId),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            // Change the opacity of the screen using a Curve based on the the animation's value
+            return FadeTransition(
+              opacity:
+                  CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
       },
     ),
     StatefulShellRoute.indexedStack(
