@@ -1,40 +1,10 @@
+import 'package:ecommerce/extensions/size_extensions.dart';
 import 'package:ecommerce/screens/home_screen.dart';
 import 'package:ecommerce/screens/product_details_screen.dart';
 import 'package:ecommerce/screens/products_screen.dart';
 import 'package:ecommerce/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-final routes = GoRouter(
-  initialLocation: '/',
-  routes: [
-    GoRoute(
-      path: '/',
-      name: 'home',
-      builder: (context, state) => const HomeScreen(),
-    ),
-    GoRoute(
-      path: '/2nd',
-      name: 'second',
-      builder: (context, state) => const SecondScreen(),
-    ),
-    GoRoute(
-      path: '/products',
-      name: 'products',
-      builder: (context, state) => const ProductsScreen(),
-      routes: [
-        GoRoute(
-          path: ':productId',
-          name: 'product details',
-          builder: (context, state) {
-            final productId = int.parse(state.pathParameters['productId']!);
-            return ProductDetailsScreen(productId: productId);
-          },
-        ),
-      ],
-    ),
-  ],
-);
 
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -48,7 +18,7 @@ final GoRouterRedirect authGuard = (context, state) {
   }
 };
 
-final routes2 = GoRouter(
+final routes = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/',
   routes: [
@@ -117,23 +87,44 @@ class ScaffoldWithNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCompact = MediaQuery.sizeOf(context).isCompact();
+
     return Scaffold(
-      body: navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: navigationShell.currentIndex,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.access_time), label: 'Second'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: 'Products'),
+      body: Row(
+        children: [
+          if (!isCompact)
+            NavigationRail(
+              destinations: const [
+                NavigationRailDestination(
+                    icon: Icon(Icons.access_time), label: Text('Second')),
+                NavigationRailDestination(
+                    icon: Icon(Icons.home), label: Text('Home')),
+                NavigationRailDestination(
+                    icon: Icon(Icons.shopping_cart), label: Text('Products')),
+              ],
+              selectedIndex: navigationShell.currentIndex,
+              onDestinationSelected: _onTap,
+            ),
+          Expanded(child: navigationShell),
         ],
-        onTap: _onTap,
       ),
+      bottomNavigationBar: isCompact
+          ? BottomNavigationBar(
+              currentIndex: navigationShell.currentIndex,
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.access_time), label: 'Second'),
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.shopping_cart), label: 'Products'),
+              ],
+              onTap: _onTap,
+            )
+          : null,
     );
   }
 
-  void _onTap(index) {
+  void _onTap(int index) {
     navigationShell.goBranch(
       index,
       // A common pattern when using bottom navigation bars is to support

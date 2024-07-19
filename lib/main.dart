@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      routerConfig: routes2,
+      routerConfig: routes,
       debugShowCheckedModeBanner: false,
     );
   }
