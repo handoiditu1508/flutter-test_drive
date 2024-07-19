@@ -44,6 +44,14 @@ final routes2 = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/',
   routes: [
+    GoRoute(
+      path: '/products/:productId',
+      name: 'product details',
+      builder: (context, state) {
+        final productId = int.parse(state.pathParameters['productId']!);
+        return ProductDetailsScreen(productId: productId);
+      },
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return ScaffoldWithNavbar(navigationShell);
@@ -74,17 +82,6 @@ final routes2 = GoRouter(
               path: '/products',
               name: 'products',
               builder: (context, state) => const ProductsScreen(),
-              routes: [
-                GoRoute(
-                  path: ':productId',
-                  name: 'product details',
-                  builder: (context, state) {
-                    final productId =
-                        int.parse(state.pathParameters['productId']!);
-                    return ProductDetailsScreen(productId: productId);
-                  },
-                ),
-              ],
             ),
           ],
         ),

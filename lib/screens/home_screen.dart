@@ -38,9 +38,13 @@ class HomeScreen extends StatelessWidget {
             // context.goNamed('products');
             // context.pushNamed('products');
 
-            context.go(Uri(
-              path: '/products/1',
-            ).toString());
+            // context.go(Uri(
+            //   path: '/products/1',
+            // ).toString());
+            context.pushNamed(
+              'product details',
+              pathParameters: {'productId': '1'},
+            );
           },
         ),
       ),
