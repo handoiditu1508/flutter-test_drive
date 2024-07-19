@@ -38,7 +38,15 @@ final routes = GoRouter(
 
 // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _sectionNavigatorKey = GlobalKey<NavigatorState>();
+
+final GoRouterRedirect authGuard = (context, state) {
+  const isAuthenticated = true;
+  if (!isAuthenticated) {
+    return '/login';
+  } else {
+    return null;
+  }
+};
 
 final routes2 = GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -47,6 +55,7 @@ final routes2 = GoRouter(
     GoRoute(
       path: '/products/:productId',
       name: 'product details',
+      redirect: authGuard,
       builder: (context, state) {
         final productId = int.parse(state.pathParameters['productId']!);
         return ProductDetailsScreen(productId: productId);
@@ -58,7 +67,6 @@ final routes2 = GoRouter(
       },
       branches: [
         StatefulShellBranch(
-          navigatorKey: _sectionNavigatorKey,
           routes: [
             GoRoute(
               path: '/2nd',
